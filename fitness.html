@@ -29,531 +29,257 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="site-nav.css">
+    <link rel="stylesheet" href="site-layout.css">
+    <script src="site-nav.js" defer></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        *, *::before, *::after { box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: #102039;
+            background: var(--site-surface);
+            font-family: Inter, system-ui, sans-serif;
             line-height: 1.6;
-            color: #1a202c;
-            background: linear-gradient(135deg, #041E42 0%, #0A2F5F 100%);
-            background-attachment: fixed;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        :focus-visible { outline: 2px solid #254cae; outline-offset: 4px; }
+
+        .fitness-story {
+            max-width: 58.5rem;
+            margin-inline: auto;
         }
-        
-        /* Navigation */
-        .navbar {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-decoration: none;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .nav-links a.active {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #ffffff;
-            cursor: pointer;
-        }
-        
-        /* Header */
-        .header {
-            padding: 100px 0 60px 0;
-            background: linear-gradient(135deg, rgba(4, 30, 66, 0.9) 0%, rgba(10, 47, 95, 0.9) 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-            z-index: 0;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: rotate(0deg) translate(0px); }
-            50% { transform: rotate(180deg) translate(20px); }
-        }
-        
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-        
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Main Content */
-        .main {
-            padding: 4rem 0;
-            position: relative;
-        }
-        
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.9);
-            color: #041E42;
-            text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 1);
-        }
-        
+
         .content-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .content-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .content-section h2 {
-            color: #041E42;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-        
-        .content-section h2 i {
-            background: linear-gradient(135deg, #041E42, #0A2F5F);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .content-section p {
-            color: #2d3748;
-            font-size: 1.1rem;
-            line-height: 1.8;
             margin-bottom: 1.5rem;
+            padding: clamp(1.125rem, 4vw, 2.75rem);
+            border: 1px solid #dbe2eb;
+            border-radius: 12px;
+            background: #fff;
+        }
+        .content-section:last-child { margin-bottom: 0; }
+        .content-section h2 {
+            display: flex;
+            align-items: baseline;
+            gap: 0.65rem;
+            margin: 0 0 1.25rem;
+            font-size: clamp(1.35rem, 2.8vw, 2rem);
+            font-weight: 650;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+        .content-section h2 i { color: #254cae; font-size: 0.85em; }
+        .content-section p {
+            margin: 0 0 1rem;
+            color: #48586f;
+            line-height: 1.75;
             text-align: justify;
         }
-        
-        .image-container {
-            text-align: center;
-            margin: 2rem 0;
+        .content-section p:last-child { margin-bottom: 0; }
+
+        .intro-story {
+            display: grid;
+            grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+            align-items: center;
+            gap: clamp(0.875rem, 4vw, 2.25rem);
         }
-        
+        .intro-story + .intro-story { margin-top: 1.5rem; }
+        .image-container { margin-block: 1rem; }
+        .intro-story .image-container { margin: 0; }
         .content-image {
-            max-width: 100%;
+            display: block;
+            width: min(100%, 31.25rem);
             height: auto;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
+            border-radius: 8px;
         }
-        
-        .content-image:hover {
-            transform: scale(1.05);
-        }
-        
+        .content-image--portrait { width: min(100%, 23rem); }
+        .content-image--compact { width: min(100%, 25rem); }
+        .content-section > .image-container > .content-image { margin-inline: auto; }
         .quote {
-            background: linear-gradient(135deg, #041E42, #0A2F5F);
-            color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem 1.25rem;
+            border-inline-start: 3px solid #254cae;
+            background: #eef4fb;
+            color: #102039;
+            font-size: 1.0625rem;
             font-style: italic;
-            font-size: 1.2rem;
-            position: relative;
         }
-        
-        .quote::before {
-            content: '"';
-            font-size: 4rem;
-            position: absolute;
-            top: -0.5rem;
-            left: 1rem;
-            opacity: 0.3;
+
+        @media (max-width: 520px) {
+            .intro-story { grid-template-columns: minmax(0, 1fr); }
+            .intro-story .content-image { width: min(100%, 13rem); }
         }
-        
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(4, 30, 66, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+        @media (prefers-reduced-motion: no-preference) {
+            .reveal-ready .fade-in {
+                opacity: 0;
+                transform: translateY(12px);
+                transition: opacity 0.4s ease, transform 0.4s ease;
             }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links a {
-                padding: 1rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                color: rgba(255, 255, 255, 0.9);
-                text-align: center;
-            }
-            
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-            
-            .nav-links a:hover, .nav-links a.active {
-                background: rgba(255, 255, 255, 0.1);
-                color: white;
-                transform: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .content-section {
-                padding: 2rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            .content-section h2 {
-                font-size: 2rem;
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .container {
-                padding: 0 1rem;
-            }
-            
-            .image-container {
-                margin: 1.5rem 0;
-            }
-            
-            .content-image {
-                max-width: 90%;
-            }
-        }
-        
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Navbar scroll effect */
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            .reveal-ready .fade-in.visible { opacity: 1; transform: none; }
         }
     </style>
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-container">
-                <a href="index.html" class="logo">Dr. Wei-Hong Li</a>
-                <ul class="nav-links">
-                    <li><a href="research.html">Research</a></li>
-                    <li><a href="publications.html">Publications</a></li>
-                    <li><a href="cv.html">CV</a></li>
-                    <li><a href="recruiting.html">Recruiting</a></li>
-                    <li><a href="fitness.html" class="active">Misc</a></li>
-                </ul>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+    <nav class="site-nav" aria-label="Main navigation">
+        <div class="site-nav__inner">
+            <a class="site-nav__logo" href="index.html">Dr. Wei-Hong Li</a>
+            <button class="site-nav__toggle" type="button" aria-label="Open navigation" aria-controls="primary-navigation" aria-expanded="false" hidden>
+                <span class="site-nav__menu-icon" aria-hidden="true"></span>
+            </button>
+            <ul class="site-nav__links" id="primary-navigation">
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="recruiting.html">Recruiting</a></li>
+                <li><a href="fitness.html" aria-current="page">Misc</a></li>
+            </ul>
         </div>
     </nav>
 
     <!-- Header -->
-    <header class="header">
+    <header class="page-header">
         <div class="container">
-            <h1><i class="fas fa-dumbbell"></i> Fitness & Reading</h1>
+            <h1>Fitness &amp; Reading</h1>
             <p>Personal journey in physical and intellectual development</p>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="main">
+    <main class="page-main">
         <div class="container">
-            <a href="index.html" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-                Back to Home
-            </a>
+            <div class="fitness-story">
+                <div class="page-actions">
+                    <a href="index.html" class="back-btn">
+                        <span aria-hidden="true">←</span>
+                        Back to Home
+                    </a>
+                </div>
 
-            <!-- Introduction -->
-            <section class="content-section fade-in">
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/13-min.jpeg" alt="Fitness Journey" class="content-image" style="width: 30%; max-width: 300px;">
-                </div>
-                
-                <p>Hi, I'm Wei-Hong Li, an amateur bodybuilder. I have been into fitness for around five years since when I was a fourth-year undergraduate student. My idols are Lazar, James Grage and Simon Panda, who are famous bodybuilders in the bodybuilding industry.</p>
-                
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/9-min.jpeg" alt="Reading and Fitness Balance" class="content-image" style="width: 30%; max-width: 300px;">
-                </div>
-                
-                <p>I am also quite keen on reading and writing. I quite believe in the old saying "文明其精神，野蛮其体魄" by Chairman Mao - "Civilize the mind, strengthen the body."</p>
-            </section>
+                <!-- Introduction -->
+                <section class="content-section fade-in">
+                    <div class="intro-story">
+                        <div class="image-container">
+                            <img src="images/Fitness-Reading/13-min.jpeg" alt="Fitness Journey" class="content-image" width="1080" height="1440" loading="lazy" decoding="async">
+                        </div>
+                        <p>Hi, I'm Wei-Hong Li, an amateur bodybuilder. I have been into fitness for around five years since when I was a fourth-year undergraduate student. My idols are Lazar, James Grage and Simon Panda, who are famous bodybuilders in the bodybuilding industry.</p>
+                    </div>
 
-            <!-- Early Journey -->
-            <section class="content-section fade-in">
-                <h2><i class="fas fa-seedling"></i> The Beginning</h2>
-                
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/1-min.jpeg" alt="Early fitness days" class="content-image" style="width: 60%; max-width: 500px;">
-                </div>
-                
-                <p>Around five years ago (2014) when I was a third-year graduate student at Sun Yat-Sen University, I started to go to the gym at Guangdong University of Foreign Studies in order to reduce my weight. With a year's training, I initially failed as I could not keep regular exercise.</p>
-                
-                <p>In 2015, I got admission from Sun Yat-Sen University for my master's degree. At that time, I was in my final year as an undergraduate student. I was so confused and tried my best to figure out how to build muscle efficiently.</p>
-            </section>
+                    <div class="intro-story">
+                        <div class="image-container">
+                            <img src="images/Fitness-Reading/9-min.jpeg" alt="Reading and Fitness Balance" class="content-image" width="640" height="854" loading="lazy" decoding="async">
+                        </div>
+                        <p>I am also quite keen on reading and writing. I quite believe in the old saying "文明其精神，野蛮其体魄" by Chairman Mao - "Civilize the mind, strengthen the body."</p>
+                    </div>
+                </section>
 
-            <!-- Transformation -->
-            <section class="content-section fade-in">
-                <h2><i class="fas fa-chart-line"></i> Progress & Learning</h2>
-                
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/5-min.jpeg" alt="Transformation progress" class="content-image" style="width: 60%; max-width: 500px;">
-                </div>
-                
-                <p>After 6 months of hard work, I reduced my weight to 70kg. But I found I was not fit enough in terms of shape and muscle definition.</p>
-                
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/2-min.jpeg" alt="Building consistency" class="content-image" style="width: 40%; max-width: 400px;">
-                </div>
-                
-                <p>In addition to this, I felt that the workout was a bit tedious and it was hard to keep working out every week.</p>
-            </section>
+                <!-- Early Journey -->
+                <section class="content-section fade-in">
+                    <h2><i class="fas fa-seedling" aria-hidden="true"></i> The Beginning</h2>
 
-            <!-- Mindset Change -->
-            <section class="content-section fade-in">
-                <h2><i class="fas fa-brain"></i> Mindset Transformation</h2>
-                
-                <div class="image-container">
-                    <img src="images/croped_academic.png" alt="Current fitness level" class="content-image" style="width: 60%; max-width: 500px;">
-                </div>
-                
-                <p>Instead of treating workout as a task, I changed to form it as a habit following my brother's suggestions. From then on, I went to the gym regularly (4-5 times a week) and trained systematically.</p>
-                
-                <div class="quote">
-                    Train like a beast, eat like a horse, and sleep like a baby
-                </div>
-                
-                <p>I learned that fitness is not simple. It is the combination of exercise, supplementation, and rest. As the popular saying goes, if you want to be in shape, you need to 'train like a beast, eat like a horse and sleep like a baby'.</p>
-            </section>
+                    <div class="image-container">
+                        <img src="images/Fitness-Reading/1-min.jpeg" alt="Early fitness days" class="content-image" width="612" height="408" loading="lazy" decoding="async">
+                    </div>
 
-            <!-- Knowledge & Growth -->
-            <section class="content-section fade-in">
-                <h2><i class="fas fa-graduation-cap"></i> Learning & Mentoring</h2>
-                
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/11-min.jpeg" alt="Learning about fitness" class="content-image" style="width: 60%; max-width: 500px;">
-                </div>
-                
-                <p>In the meanwhile, I started reading books and blogs about fitness, where I learned about some superstars like Lazar, Simon Panda and James Grage, who had a very great impact on my fitness career. Also, I learned something from my younger brother.</p>
-                
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/4-min.jpeg" alt="Advanced training" class="content-image" style="width: 60%; max-width: 500px;">
-                </div>
-                
-                <p>With five years of experience in fitness, I became stronger both physically and mentally. In each training day, I would test which strategy or exercise is the best for a specific muscle group. From 2016, I became a fitness trainer to help other students in our ISEE Lab get in shape or reduce fat. I am very glad to see most members in our team do regular exercise now and gained significant success this year. Besides, with constant training, I am fit now and I am able to do the human flag!</p>
-            </section>
+                    <p>Around five years ago (2014) when I was a third-year graduate student at Sun Yat-Sen University, I started to go to the gym at Guangdong University of Foreign Studies in order to reduce my weight. With a year's training, I initially failed as I could not keep regular exercise.</p>
 
-            <!-- International Experience -->
-            <section class="content-section fade-in">
-                <h2><i class="fas fa-globe"></i> Fitness Around the World</h2>
-                
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/3-min.jpeg" alt="Training abroad" class="content-image" style="width: 60%; max-width: 500px;">
-                </div>
-                
-                <p>In October 2017, I got an opportunity to conduct a visiting study to be involved in the Royal Newton Project at Queen Mary University of London in the UK. I kept regular exercise in the gym, which was just on the first floor of our lab building, or trained in the park. Although the weather was very cold compared to Guangzhou, the environment there was extremely nice. I believe I will keep doing exercise at any place, at any time.</p>
-            </section>
+                    <p>In 2015, I got admission from Sun Yat-Sen University for my master's degree. At that time, I was in my final year as an undergraduate student. I was so confused and tried my best to figure out how to build muscle efficiently.</p>
+                </section>
 
-            <!-- Reading & Study -->
-            <section class="content-section fade-in">
-                <h2><i class="fas fa-book"></i> The Power of Reading</h2>
-                
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/12-min.jpeg" alt="Reading journey" class="content-image" style="width: 60%; max-width: 500px;">
-                </div>
-                
-                <p>Beyond fitness, I kept regular reading, which is a bridge to knowledge.</p>
-                
-                <div class="image-container">
-                    <img src="https://WeihongLi-ac.github.io/images/Fitness-Reading/10-min.jpeg" alt="Study environment" class="content-image" style="width: 60%; max-width: 500px;">
-                </div>
-                
-                <p>Apart from research and fitness, I hope I can own an excellent study with a vast quantity of books, spacious space as well as classy chairs, tables and furniture. It will be an extremely leisurely time to read a book with a very nice cup of tea in such a comfortable environment. It is also an extremely great place to share Kung Fu tea with my family and friends. By the way, my favorite teas are Red Tea from Yunnan Province and Dancong Tea from my hometown.</p>
-            </section>
+                <!-- Transformation -->
+                <section class="content-section fade-in">
+                    <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Progress & Learning</h2>
+
+                    <div class="image-container">
+                        <img src="images/Fitness-Reading/5-min.jpeg" alt="Transformation progress" class="content-image" width="1387" height="1080" loading="lazy" decoding="async">
+                    </div>
+
+                    <p>After 6 months of hard work, I reduced my weight to 70kg. But I found I was not fit enough in terms of shape and muscle definition.</p>
+
+                    <div class="image-container">
+                        <img src="images/Fitness-Reading/2-min.jpeg" alt="Building consistency" class="content-image content-image--compact" width="1262" height="1052" loading="lazy" decoding="async">
+                    </div>
+
+                    <p>In addition to this, I felt that the workout was a bit tedious and it was hard to keep working out every week.</p>
+                </section>
+
+                <!-- Mindset Change -->
+                <section class="content-section fade-in">
+                    <h2><i class="fas fa-brain" aria-hidden="true"></i> Mindset Transformation</h2>
+
+                    <div class="image-container">
+                        <img src="images/croped_academic.png" alt="Current fitness level" class="content-image" width="633" height="633" loading="lazy" decoding="async">
+                    </div>
+
+                    <p>Instead of treating workout as a task, I changed to form it as a habit following my brother's suggestions. From then on, I went to the gym regularly (4-5 times a week) and trained systematically.</p>
+
+                    <blockquote class="quote">
+                        Train like a beast, eat like a horse, and sleep like a baby
+                    </blockquote>
+
+                    <p>I learned that fitness is not simple. It is the combination of exercise, supplementation, and rest. As the popular saying goes, if you want to be in shape, you need to 'train like a beast, eat like a horse and sleep like a baby'.</p>
+                </section>
+
+                <!-- Knowledge & Growth -->
+                <section class="content-section fade-in">
+                    <h2><i class="fas fa-graduation-cap" aria-hidden="true"></i> Learning & Mentoring</h2>
+
+                    <div class="image-container">
+                        <img src="images/Fitness-Reading/11-min.jpeg" alt="Learning about fitness" class="content-image" width="1440" height="940" loading="lazy" decoding="async">
+                    </div>
+
+                    <p>In the meanwhile, I started reading books and blogs about fitness, where I learned about some superstars like Lazar, Simon Panda and James Grage, who had a very great impact on my fitness career. Also, I learned something from my younger brother.</p>
+
+                    <div class="image-container">
+                        <img src="images/Fitness-Reading/4-min.jpeg" alt="Advanced training" class="content-image" width="1280" height="960" loading="lazy" decoding="async">
+                    </div>
+
+                    <p>With five years of experience in fitness, I became stronger both physically and mentally. In each training day, I would test which strategy or exercise is the best for a specific muscle group. From 2016, I became a fitness trainer to help other students in our ISEE Lab get in shape or reduce fat. I am very glad to see most members in our team do regular exercise now and gained significant success this year. Besides, with constant training, I am fit now and I am able to do the human flag!</p>
+                </section>
+
+                <!-- International Experience -->
+                <section class="content-section fade-in">
+                    <h2><i class="fas fa-globe" aria-hidden="true"></i> Fitness Around the World</h2>
+
+                    <div class="image-container">
+                        <img src="images/Fitness-Reading/3-min.jpeg" alt="Training abroad" class="content-image content-image--portrait" width="3120" height="4160" loading="lazy" decoding="async">
+                    </div>
+
+                    <p>In October 2017, I got an opportunity to conduct a visiting study to be involved in the Royal Newton Project at Queen Mary University of London in the UK. I kept regular exercise in the gym, which was just on the first floor of our lab building, or trained in the park. Although the weather was very cold compared to Guangzhou, the environment there was extremely nice. I believe I will keep doing exercise at any place, at any time.</p>
+                </section>
+
+                <!-- Reading & Study -->
+                <section class="content-section fade-in">
+                    <h2><i class="fas fa-book" aria-hidden="true"></i> The Power of Reading</h2>
+
+                    <div class="image-container">
+                        <img src="images/Fitness-Reading/12-min.jpeg" alt="Reading journey" class="content-image" width="500" height="393" loading="lazy" decoding="async">
+                    </div>
+
+                    <p>Beyond fitness, I kept regular reading, which is a bridge to knowledge.</p>
+
+                    <div class="image-container">
+                        <img src="images/Fitness-Reading/10-min.jpeg" alt="Study environment" class="content-image" width="500" height="338" loading="lazy" decoding="async">
+                    </div>
+
+                    <p>Apart from research and fitness, I hope I can own an excellent study with a vast quantity of books, spacious space as well as classy chairs, tables and furniture. It will be an extremely leisurely time to read a book with a very nice cup of tea in such a comfortable environment. It is also an extremely great place to share Kung Fu tea with my family and friends. By the way, my favorite teas are Red Tea from Yunnan Province and Dancong Tea from my hometown.</p>
+                </section>
+            </div>
         </div>
     </main>
 
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Fade in animation on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(entries => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
                 }
-            });
-        }, {
-            threshold: 0.1
-        });
+            }, { threshold: 0.1 });
 
-        document.querySelectorAll('.fade-in').forEach((el) => {
-            observer.observe(el);
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Mobile menu functionality (if needed in the future)
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-            });
+            document.querySelectorAll('.fade-in').forEach(section => observer.observe(section));
+            document.documentElement.classList.add('reveal-ready');
         }
     </script>
 </body>

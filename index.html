@@ -26,6 +26,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
+    <link rel="stylesheet" href="site-nav.css">
+    <link rel="stylesheet" href="site-layout.css">
+    <script src="site-nav.js" defer></script>
     <style>
         * {
             margin: 0;
@@ -37,255 +40,97 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: #1a202c;
-            background: linear-gradient(135deg, #041E42 0%, #0A2F5F 100%);
-            background-attachment: fixed;
+            background: #f3f5f7;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        :focus-visible {
+            outline: 2px solid #267094;
+            outline-offset: 4px;
         }
-        
-        /* Navigation */
-        .navbar {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-decoration: none;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #4a5568;
-            cursor: pointer;
+
+        .hero :focus-visible,
+        .contact :focus-visible {
+            outline-color: #9cdeed;
         }
         
         /* Hero Section */
-        .hero {
-            padding: 100px 0 60px 0;
-            background: linear-gradient(135deg, rgba(4, 30, 66, 0.9) 0%, rgba(10, 47, 95, 0.9) 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
+        .hero > .container {
+            max-width: 75rem;
+            padding-inline: 1.25rem;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-            z-index: 0;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: rotate(0deg) translate(0px); }
-            50% { transform: rotate(180deg) translate(20px); }
-        }
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: float 20s linear infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        
+
         .hero-content {
             display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 4rem;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: clamp(2rem, 5vw, 4rem);
             align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero-text h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
         }
         
         .hero-text .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.95;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
+            margin-bottom: 0.9rem;
+            color: #dceafa;
+            font-size: clamp(1rem, 2vw, 1.2rem);
         }
         
         .hero-text .description {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
+            margin-bottom: 1.35rem;
         }
         
         .hero-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.7rem;
             flex-wrap: wrap;
         }
         
         .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            min-height: 2.75rem;
+            padding: 0.625rem 1rem;
+            border: 1px solid transparent;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .btn:hover::before {
-            left: 100%;
         }
         
         .btn-primary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            background: #e9f4ff;
+            color: #112a46;
         }
         
         .btn-primary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+            background: #cfe8fb;
         }
         
         .btn-outline {
-            background: rgba(255, 255, 255, 0.1);
             color: white;
-            border-color: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            border-color: rgb(255 255 255 / 36%);
         }
         
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-        }
-        
-        .hero-image {
-            position: relative;
+            background: rgb(255 255 255 / 10%);
         }
         
         .profile-image {
-            width: 280px;
-            height: 280px;
+            display: block;
+            width: clamp(10rem, 22vw, 17.5rem);
+            height: auto;
+            aspect-ratio: 1;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 1;
-            transition: transform 0.3s ease;
+            border: 4px solid rgb(255 255 255 / 25%);
         }
-        
-        .profile-image:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Main Content */
-        .main {
-            padding: 80px 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            margin: 0 20px;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-        
+
         .section {
-            margin-bottom: 80px;
+            margin-bottom: var(--site-section-space);
         }
         
         .section h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.9rem, 4vw, 2.5rem);
             font-weight: 700;
-            margin-bottom: 2rem;
-            color: #2d3748;
+            line-height: 1.2;
+            margin-bottom: 1.75rem;
+            color: #132a45;
             position: relative;
         }
         
@@ -294,7 +139,7 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 60px;
+            width: 48px;
             height: 3px;
             background: linear-gradient(90deg, #041E42, #0A2F5F);
             border-radius: 2px;
@@ -305,6 +150,50 @@
             color: #4a5568;
             margin-bottom: 1.5rem;
             line-height: 1.7;
+        }
+
+        .section > p {
+            max-width: 76ch;
+        }
+
+        #about > p {
+            text-align: justify;
+        }
+
+        .section a {
+            color: #174f76;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.2em;
+        }
+
+        .section a:hover {
+            color: #041e42;
+        }
+
+        .home-intro {
+            margin-bottom: var(--site-section-space);
+        }
+
+        .home-intro .section,
+        .home-intro .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (min-width: 1024px) {
+            .page-main > .container {
+                padding-inline: calc(var(--site-gutter) + 3rem);
+            }
+
+            .home-intro {
+                display: grid;
+                grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+                align-items: start;
+                gap: clamp(2rem, 4vw, 3rem);
+            }
+
+            .home-intro .opportunities {
+                margin-top: 0;
+            }
         }
         
         /* Research Focus */
@@ -384,23 +273,16 @@
         
         /* News Section */
         .news-section {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            padding: 3rem;
-            border-radius: 20px;
-            margin: 2rem 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin: 1.75rem 0;
         }
         
         .scrolling-news {
-            height: 300px;
+            max-height: clamp(17.5rem, 45vh, 24rem);
             overflow-y: auto;
-            border: 1px solid rgba(102, 126, 234, 0.2);
+            border: 1px solid #d6dee8;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 1rem;
+            background: #ffffff;
+            padding: 0.25rem clamp(0.75rem, 2vw, 1.5rem);
         }
         
         .scrolling-news::-webkit-scrollbar {
@@ -424,15 +306,16 @@
         }
         
         .news-item {
-            padding: 1rem;
-            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
-            transition: all 0.3s ease;
-            border-radius: 8px;
+            display: grid;
+            grid-template-columns: minmax(8.75rem, 10rem) minmax(0, 1fr);
+            gap: 0.25rem 1rem;
+            padding: 0.85rem 0.5rem;
+            border-bottom: 1px solid #e3e9f1;
+            overflow-wrap: anywhere;
         }
         
         .news-item:hover {
-            background: rgba(4, 30, 66, 0.05);
-            transform: translateX(5px);
+            background: #f4f7fb;
         }
         
         .news-item:last-child {
@@ -441,11 +324,7 @@
         
         .news-date {
             font-weight: 600;
-            background: linear-gradient(90deg, #041E42, #0A2F5F);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-right: 1rem;
+            color: #173957;
         }
         
         /* Research Areas */
@@ -574,71 +453,53 @@
         
         /* Opportunities Section */
         .opportunities {
-            background: linear-gradient(135deg, rgba(4, 30, 66, 0.9) 0%, rgba(10, 47, 95, 0.9) 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 20px;
-            margin: 3rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .opportunities::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: 0;
-            pointer-events: none;
+            background: #e9eff6;
+            color: #2b4056;
+            padding: clamp(1.25rem, 2.5vw, 2rem);
+            border: 1px solid #d1ddec;
+            border-radius: 14px;
+            margin: 2rem 0 0;
         }
         
         .opportunities h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
+            color: #132a45;
+            font-size: clamp(1.375rem, 2.2vw, 1.65rem);
+            line-height: 1.25;
+            margin-bottom: 1rem;
         }
         
         .opportunities ul {
-            margin: 1.5rem 0;
-            position: relative;
-            z-index: 1;
+            margin: 1.25rem 0;
+            padding-inline-start: 1.2rem;
         }
         
-        .opportunities li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .opportunities p {
-            position: relative;
-            z-index: 1;
+        .opportunities li + li {
+            margin-top: 0.25rem;
         }
         
         .opportunities a {
-            color: #fed7e2;
+            color: #174f76;
             text-decoration: underline;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
+            text-underline-offset: 0.2em;
+            transition: color 0.2s ease;
         }
         
         .opportunities a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-            text-shadow: 0 0 8px rgba(254, 215, 226, 0.6);
+            color: #041e42;
+        }
+
+        .opportunities p:last-child a:last-child {
+            display: block;
+            margin-top: 0.75rem;
+            font-weight: 600;
         }
         
         /* Contact Section */
         .contact {
-            background: linear-gradient(135deg, rgba(4, 30, 66, 0.9) 0%, rgba(10, 47, 95, 0.9) 100%);
+            background: linear-gradient(135deg, #0b213d, #153b60);
             color: white;
-            padding: 3rem;
-            border-radius: 20px;
+            padding: clamp(1.25rem, 4vw, 3rem);
+            border-radius: 16px;
             margin: 3rem 0;
             position: relative;
             overflow: hidden;
@@ -657,14 +518,15 @@
         
         .contact-content {
             display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 3rem;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: clamp(1.25rem, 4vw, 3rem);
             align-items: start;
         }
         
         .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: clamp(1.45rem, 3vw, 1.8rem);
+            line-height: 1.2;
+            margin-bottom: 1rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
@@ -672,8 +534,8 @@
         
         .contact-item {
             display: flex;
-            align-items: center;
-            gap: 1rem;
+            align-items: baseline;
+            gap: 0.8rem;
             margin-bottom: 1rem;
             position: relative;
             z-index: 1;
@@ -682,18 +544,19 @@
         .contact-item i {
             font-size: 1.2rem;
             color: rgba(255, 255, 255, 0.8);
-            width: 20px;
+            flex: 0 0 20px;
         }
         
         .contact-item a {
             color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            transition: all 0.3s ease;
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+            overflow-wrap: anywhere;
+            transition: color 0.2s ease;
         }
         
         .contact-item a:hover {
             color: white;
-            text-decoration: underline;
         }
         
         .social-links {
@@ -773,122 +636,90 @@
         }
         
         /* Responsive Design */
+        @media (min-width: 64rem) {
+            .profile-image {
+                width: min(22vw, 15rem);
+            }
+        }
+
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(4, 30, 66, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links a {
-                padding: 1rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                color: rgba(255, 255, 255, 0.9);
-                text-align: center;
-            }
-            
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-            
-            .nav-links a:hover, .nav-links a.active {
-                background: rgba(255, 255, 255, 0.1);
-                color: white;
-                transform: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
             .hero-content {
-                grid-template-columns: 1fr;
+                grid-template-columns: minmax(0, 1fr);
                 text-align: center;
-                gap: 2rem;
+                gap: clamp(1.25rem, 4vw, 2rem);
             }
             
-            .hero-text h1 {
-                font-size: 2.5rem;
+            .hero-text .description {
+                margin-inline: auto;
+            }
+
+            .hero-text .subtitle,
+            .profile-image {
+                margin-inline: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                gap: 0.65rem;
             }
             
             .profile-image {
-                width: 200px;
-                height: 200px;
+                width: clamp(9rem, 30vw, 11rem);
             }
-            
+
             .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+                grid-template-columns: minmax(0, 1fr);
             }
             
             .social-links {
                 justify-content: center;
             }
         }
+
+        @media (max-width: 560px) {
+            .news-item { grid-template-columns: minmax(0, 1fr); }
+            .news-date { font-size: 0.875rem; }
+        }
         
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--site-nav-height) + 1rem);
         }
         
-        /* Animation classes */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 
-<body>
+<body id="top">
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-container">
-                <a href="#" class="logo">Dr. Wei-Hong Li</a>
-                <ul class="nav-links">
-                    <li><a href="research.html">Research</a></li>
-                    <li><a href="publications.html">Publications</a></li>
-                    <li><a href="cv.html">CV</a></li>
-                    <li><a href="recruiting.html">Recruiting</a></li>
-                    <li><a href="fitness.html">Misc</a></li>
-                </ul>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+    <nav class="site-nav" aria-label="Main navigation">
+        <div class="site-nav__inner">
+            <a class="site-nav__logo" href="#top" aria-current="page">Dr. Wei-Hong Li</a>
+            <button class="site-nav__toggle" type="button" aria-label="Open navigation" aria-controls="primary-navigation" aria-expanded="false" hidden>
+                <span class="site-nav__menu-icon" aria-hidden="true"></span>
+            </button>
+            <ul class="site-nav__links" id="primary-navigation">
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="recruiting.html">Recruiting</a></li>
+                <li><a href="fitness.html">Misc</a></li>
+            </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <header class="hero page-header">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-image">
-                    <img src="images/croped_academic.png" alt="Dr. Wei-Hong Li" class="profile-image">
+                    <img src="images/croped_academic.png" width="633" height="633" alt="Dr. Wei-Hong Li" class="profile-image">
                 </div>
                 <div class="hero-text">
                     <h1>Dr. Wei-Hong Li</h1>
                     <p class="subtitle">Assistant Professor | University of Bristol</p>
                     <p class="description">
-                        Research in Physical AI, including physical-aware modeling, multimodal learning, generative modeling, video understanding
+                        Research in Physical AI, including <span class="keep-together">physical-aware</span> modeling, multimodal learning, generative modeling, video understanding
                     </p>
                     <div class="hero-buttons">
                         <a href="research-interests.html" class="btn btn-primary">Explore Research</a>
@@ -898,342 +729,478 @@
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- Main Content -->
-    <main class="main">
+    <main class="page-main">
         <div class="container">
-            <!-- About Section -->
-            <section id="about" class="section fade-in">
-                <h2>About Me</h2>
-                <p>
-                    I am currently a <strong>Lecturer</strong> (equivalent to assistant professor in the US) within School of Computer Science at the 
-                    <strong>University of Bristol</strong> and a faculty member of the 
-                    <a href="https://uob-mavi.github.io/people/" target="_blank">MAVI group</a>. 
-                    I am also a member of <a href="https://ellis.eu/members" target="_blank">ELLIS – the European Laboratory for Learning and Intelligent Systems</a>.
-                </p>
-                <p>
-                    Prior to Bristol, I was very lucky to work with <a href="http://homepages.inf.ed.ac.uk/hbilen/index.html" target="_blank">Dr. Hakan Bilen</a> 
-                    as a PhD student (also supervised by <a href="https://homepages.inf.ed.ac.uk/thospeda/" target="_blank">Prof. Timothy Hospedales</a>) and a postdoc 
-                    and spent five wonderful years at the <strong>University of Edinburgh</strong>. I have also been a postdoctoral fellow within the 
-                    MultiMedia Lab (MMLab) at the <strong>Chinese University of Hong Kong</strong>, working with 
-                    <a href="https://xyue.io" target="_blank">Dr. Xiangyu Yue</a>. Before Edinburgh, I did my master and bachelor at 
-                    <strong>Sun Yat-sen University</strong>, working with <a href="http://www.isee-ai.cn/~zhwshi/index.html" target="_blank">Prof. Wei-Shi Zheng</a> 
-                    who thankfully introduced me to computer vision. During the master program, I was lucky to visit 
-                    <strong>Queen Mary University of London</strong> to work with 
-                    <a href="https://ssgong.github.io" target="_blank">Prof. Shaogang Gong FREng</a>.
-                </p>
-                <p>
-                    My research interests are in computer vision and machine learning, currently with a focus on Physical AI, including physical-aware modeling, multimodal learning, generative modeling, video understanding etc. My PhD thesis is awarded the 
-                    BMVA <a href="https://www.bmva.org/bursaries/sullivan-prize.html" target="_blank">Sullivan Doctoral Thesis Prize Runner-Up</a>. 
-                    My <a href="https://groups.inf.ed.ac.uk/vico/research/MTPSL/" target="_blank">MTPSL</a> paper is awarded the 
-                    <a href="https://twitter.com/CVPR/status/1539772091112857600" target="_blank">CVPR 2022 Best Paper Nominees</a>. 
-                    I serve as Area Chair at ICML'27, ICLR'26'27 and NeurIPS'26, Senior Area Chair at ICME'26, and have been a reviewer for top-tier conferences such as CVPR, ICCV, NeurIPS and journals such as TPAMI et al and 
-                    received the top reviewer award at NeurIPS'23'24.
-                </p>
-            </section>
+            <div class="home-intro">
+                <!-- About Section -->
+                <section id="about" class="section">
+                    <h2>About Me</h2>
+                    <p>
+                        I am currently a <strong>Lecturer</strong> (equivalent to assistant professor in the US) within School of Computer Science at the
+                        <strong>University of Bristol</strong> and a faculty member of the
+                        <a href="https://uob-mavi.github.io/people/" target="_blank">MAVI group</a>.
+                        I am also a member of <a href="https://ellis.eu/members" target="_blank">ELLIS – the European Laboratory for Learning and Intelligent Systems</a>.
+                    </p>
+                    <p>
+                        Prior to Bristol, I was very lucky to work with <a href="http://homepages.inf.ed.ac.uk/hbilen/index.html" target="_blank">Dr. Hakan Bilen</a>
+                        as a PhD student (also supervised by <a href="https://homepages.inf.ed.ac.uk/thospeda/" target="_blank">Prof. Timothy Hospedales</a>) and a postdoc
+                        and spent five wonderful years at the <strong>University of Edinburgh</strong>. I have also been a postdoctoral fellow within the
+                        MultiMedia Lab (MMLab) at the <strong>Chinese University of Hong Kong</strong>, working with
+                        <a href="https://xyue.io" target="_blank">Dr. Xiangyu Yue</a>. Before Edinburgh, I did my master and bachelor at
+                        <strong>Sun Yat-sen University</strong>, working with <a href="http://www.isee-ai.cn/~zhwshi/index.html" target="_blank">Prof. Wei-Shi Zheng</a>
+                        who thankfully introduced me to computer vision. During the master program, I was lucky to visit
+                        <strong>Queen Mary University of London</strong> to work with
+                        <a href="https://ssgong.github.io" target="_blank">Prof. Shaogang Gong FREng</a>.
+                    </p>
+                    <p>
+                        My research interests are in computer vision and machine learning, currently with a focus on Physical AI, including physical-aware modeling, multimodal learning, generative modeling, video understanding etc. My PhD thesis is awarded the
+                        BMVA <a href="https://www.bmva.org/bursaries/sullivan-prize.html" target="_blank">Sullivan Doctoral Thesis Prize Runner-Up</a>.
+                        My <a href="https://groups.inf.ed.ac.uk/vico/research/MTPSL/" target="_blank">MTPSL</a> paper is awarded the
+                        <a href="https://twitter.com/CVPR/status/1539772091112857600" target="_blank">CVPR 2022 Best Paper Nominees</a>.
+                        I serve as Area Chair at ICML'27, ICLR'26'27 and NeurIPS'26, Senior Area Chair at ICME'26, and have been a reviewer for top-tier conferences such as CVPR, ICCV, NeurIPS and journals such as TPAMI et al and
+                        received the top reviewer award at NeurIPS'23'24.
+                    </p>
+                </section>
 
-            <!-- Opportunities Section -->
-            <section id="opportunities" class="opportunities fade-in">
-                <h3><a href="recruiting.html" style="color: inherit; text-decoration: none;">PhD & Research Opportunities</a></h3>
-                <p>
-                    I am actively seeking highly self-motivated PhD students, Postdoc, visiting researchers, and research interns 
-                    to join our team at the University of Bristol. We have GPU (H200) support from Isambard-AI, the best supercomputer in the UK. We work on exciting areas including:
-                </p>
-                <ul>
-                    <li>Physical AI</li>
-                    <li>Generative modeling and synthesis</li>
-                    <li>3D computer vision and spatial understanding</li>
-                    <li>World Modeling</li>
-                    <li>Multimodal learning and representation</li>
-                    <li>Motion generation and human-centered AI</li>
-                    <li>Universal representation learning</li>
-                </ul>
-                <p>
-                    <strong>Interested?</strong> Fill this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeueI4kdXnJxqFL6viIbqwU1eaFEmVZi-xHPGxLydtZOnCFVQ/viewform?usp=header">form</a> to apply or feel free to <a href="mailto:whli.bristol@gmail.com">email me</a> to discuss these opportunities! 
-                    <a href="recruiting.html" style="color: #fed7e2;">Learn more about available positions →</a>
-                </p>
-            </section>
+                <!-- Opportunities Section -->
+                <section id="opportunities" class="opportunities">
+                    <h3><a href="recruiting.html" style="color: inherit; text-decoration: none;">PhD & Research Opportunities</a></h3>
+                    <p>
+                        I am actively seeking highly self-motivated PhD students, Postdoc, visiting researchers, and research interns
+                        to join our team at the University of Bristol. We have GPU (H200) support from Isambard-AI, the best supercomputer in the UK. We work on exciting areas including:
+                    </p>
+                    <ul>
+                        <li>Physical AI</li>
+                        <li>Generative modeling and synthesis</li>
+                        <li>3D computer vision and spatial understanding</li>
+                        <li>World Modeling</li>
+                        <li>Multimodal learning and representation</li>
+                        <li>Motion generation and human-centered AI</li>
+                        <li>Universal representation learning</li>
+                    </ul>
+                    <p>
+                        <strong>Interested?</strong> Fill this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeueI4kdXnJxqFL6viIbqwU1eaFEmVZi-xHPGxLydtZOnCFVQ/viewform?usp=header">form</a> to apply or feel free to <a href="mailto:whli.bristol@gmail.com">email me</a> to discuss these opportunities!
+                        <a href="recruiting.html">Learn more about available positions →</a>
+                    </p>
+                </section>
+            </div>
 
             <!-- News Section -->
-            <section id="news" class="section fade-in">
-                <h2>Latest News</h2>
+            <section id="news" class="section" aria-labelledby="news-heading">
+                <h2 id="news-heading">Latest News</h2>
                 <div class="news-section">
-                    <div class="scrolling-news">
+                    <div class="scrolling-news" role="region" aria-labelledby="news-heading" tabindex="0">
                         <div class="news-item">
                             <span class="news-date">November 2026:</span>
-                            Invited to serve as Area Chair at ICML'27!
+                            <div>
+                                Invited to serve as Area Chair at ICML'27!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">November 2026:</span>
-                            <a href="https://www.bristol.ac.uk/jobs/find/details/?jobId=392459&jobTitle=Senior%20Research%20Associate">Fully-funded Postdoc position</a> open in MaVi to work with <a href="http://dimadamen.github.io/">Prof Dima Damen</a> and me - DL 21 December 2026.
+                            <div>
+                                <a href="https://www.bristol.ac.uk/jobs/find/details/?jobId=392459&jobTitle=Senior%20Research%20Associate">Fully-funded Postdoc position</a> open in MaVi to work with <a href="http://dimadamen.github.io/">Prof Dima Damen</a> and me - DL 21 December 2026.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">September 2026:</span>
-                            <a href="https://scholar.google.com/citations?user=KRQ3cJwAAAAJ&hl=zh-CN">Xiaoye</a> has received a fully funded PhD position from NUS and a fellowship from <a href="https://memories.ai">Memories.ai</a>. Congrats to Xiaoye!
+                            <div>
+                                <a href="https://scholar.google.com/citations?user=KRQ3cJwAAAAJ&hl=zh-CN">Xiaoye</a> has received a fully funded PhD position from NUS and a fellowship from <a href="https://memories.ai">Memories.ai</a>. Congrats to Xiaoye!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">September 2026:</span>
-                            Welcome Hanbing Wu joining MaVi as a visiting student hosted by Dima and me!
+                            <div>
+                                Welcome Hanbing Wu joining MaVi as a visiting student hosted by Dima and me!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">August 2026:</span>
-                            I will be Malmo for organizing the ECCV 2026 <a href="https://uniworld-ai.github.io">UniWorld</a> workshop and attending the main conference! I will also attend our <a href="https://cordis.europa.eu/project/id/101298706">WeHear</a> EU-funded Project Kick-off Meeting at DTU.
+                            <div>
+                                I will be Malmo for organizing the ECCV 2026 <a href="https://uniworld-ai.github.io">UniWorld</a> workshop and attending the main conference! I will also attend our <a href="https://cordis.europa.eu/project/id/101298706">WeHear</a> EU-funded Project Kick-off Meeting at DTU.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">August 2026:</span>
-                            I visited <a href="https://www.elliottwu.com">Shangzhe (Elliott) Wu</a> at the University of Cambridge.
+                            <div>
+                                I visited <a href="https://www.elliottwu.com">Shangzhe (Elliott) Wu</a> at the University of Cambridge.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">April 2026:</span>
-                            One paper accepted to ICML'26, congrats to our collaborators!
+                            <div>
+                                One paper accepted to ICML'26, congrats to our collaborators!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">April 2026:</span>
-                            Our workshop proposal is accepted to ECCV'26 and we will be organizing the <a href="https://uniworld-ai.github.io">UniWorld</a> workshop at Malmo!
+                            <div>
+                                Our workshop proposal is accepted to ECCV'26 and we will be organizing the <a href="https://uniworld-ai.github.io">UniWorld</a> workshop at Malmo!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">March 2026:</span>
-                            Invited to serve as Area Chair at NeurIPS'26!
+                            <div>
+                                Invited to serve as Area Chair at NeurIPS'26!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">March 2026:</span>
-                            Happy to share that I am awarded a <a href="https://www.nvidia.com/en-us/industries/higher-education-research/academic-grant-program/">NVIDIA Academic Grant</a>.
+                            <div>
+                                Happy to share that I am awarded a <a href="https://www.nvidia.com/en-us/industries/higher-education-research/academic-grant-program/">NVIDIA Academic Grant</a>.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">February 2026:</span>
-                            One paper accepted to CVPR'26. Congrats to Xiaoye who was doing remote intern with me and Chen and Xiangyu from CUHK!
+                            <div>
+                                One paper accepted to CVPR'26. Congrats to Xiaoye who was doing remote intern with me and Chen and Xiangyu from CUHK!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">September 2025:</span>
-                            Invited to serve as Area Chair at ICLR'26!
+                            <div>
+                                Invited to serve as Area Chair at ICLR'26!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">July 2025:</span>
-                            I am excited to join the University of Bristol as a Lecturer and a core faculty within the <a href="https://uob-mavi.github.io/people/" target="_blank">MAVI group</a>!
+                            <div>
+                                I am excited to join the University of Bristol as a Lecturer and a core faculty within the <a href="https://uob-mavi.github.io/people/" target="_blank">MAVI group</a>!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">June 2025:</span>
-                            One paper accepted to ICCV 2025. Congrats to Yilei, Yiyuan, Minghong, and Xiangyu!
+                            <div>
+                                One paper accepted to ICCV 2025. Congrats to Yilei, Yiyuan, Minghong, and Xiangyu!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">March 2025:</span>
-                            I will join the University of Bristol as a Lecturer (Assistant Professor) and will be co-leading the <a href="https://uob-mavi.github.io/people/" target="_blank">MAVI group</a> in fall 2025!
+                            <div>
+                                I will join the University of Bristol as a Lecturer (Assistant Professor) and will be co-leading the <a href="https://uob-mavi.github.io/people/" target="_blank">MAVI group</a> in fall 2025!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">February 2025:</span>
-                            One paper accepted to CVPR 2025. Congrats to Chen, Xiangyu and our collaborators!
+                            <div>
+                                One paper accepted to CVPR 2025. Congrats to Chen, Xiangyu and our collaborators!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">November 2024:</span>
-                            Received the <a href="https://neurips.cc/Conferences/2024/ProgramCommittee" target="_blank">Top Reviewer Award at NeurIPS 2024</a>.
+                            <div>
+                                Received the <a href="https://neurips.cc/Conferences/2024/ProgramCommittee" target="_blank">Top Reviewer Award at NeurIPS 2024</a>.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">October 2024:</span>
-                            One paper accepted to NeurIPS 2024. Congrats to Lingxiao, Xiangyu and our collaborators!
+                            <div>
+                                One paper accepted to NeurIPS 2024. Congrats to Lingxiao, Xiangyu and our collaborators!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">January 2024:</span>
-                            One paper accepted to ICLR 2024. Congrats to Steven, Ales, and Hakan!
+                            <div>
+                                One paper accepted to ICLR 2024. Congrats to Steven, Ales, and Hakan!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">November 2023:</span>
-                            Received the Top Reviewer Award at NeurIPS 2023.
+                            <div>
+                                Received the Top Reviewer Award at NeurIPS 2023.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">November 2023:</span>
-                            Received the BMVA Sullivan Doctoral Thesis Prize Runner-Up.
+                            <div>
+                                Received the BMVA Sullivan Doctoral Thesis Prize Runner-Up.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">October 2023:</span>
-                            Giving an invited talk about Universal Representation Learning (including our recent 3D-aware MTL paper) at the AI seminar at HKUST-GZ.
+                            <div>
+                                Giving an invited talk about Universal Representation Learning (including our recent 3D-aware MTL paper) at the AI seminar at HKUST-GZ.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">October 2023:</span>
-                            We have released a preprint of our recent work on 3D-aware multi-task learning. Make sure to check it out!
+                            <div>
+                                We have released a preprint of our recent work on 3D-aware multi-task learning. Make sure to check it out!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">July 2023:</span>
-                            Our Universal Representations paper is accepted by IJCV. Congrats to Xialei and Hakan!
+                            <div>
+                                Our Universal Representations paper is accepted by IJCV. Congrats to Xialei and Hakan!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">July 2023:</span>
-                            Giving a talk about our MTPSL paper at the IPAB Workshop.
+                            <div>
+                                Giving a talk about our MTPSL paper at the IPAB Workshop.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">June 2023:</span>
-                            Presenting our TSA paper at the Affordable Machine Learning Workshop.
+                            <div>
+                                Presenting our TSA paper at the Affordable Machine Learning Workshop.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">March 2023:</span>
-                            Giving an invited talk (Learning universal representations across tasks and domains) at the Sun Yat-sen University, China.
+                            <div>
+                                Giving an invited talk (Learning universal representations across tasks and domains) at the Sun Yat-sen University, China.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">December 2022:</span>
-                            My PhD thesis titled "Learning universal representations across tasks and domains" has been released!
+                            <div>
+                                My PhD thesis titled "Learning universal representations across tasks and domains" has been released!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">September 2022:</span>
-                            We are organizing the Universal Representations for Computer Vision Workshop at BMVC 2022. We invite submissions of regular and short papers. See Call for Papers for more details!
+                            <div>
+                                We are organizing the Universal Representations for Computer Vision Workshop at BMVC 2022. We invite submissions of regular and short papers. See Call for Papers for more details!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">September 2022:</span>
-                            One paper accepted by TMM. Congrats to Yu-Kun, Fa-Ting, and Wei-Shi!
+                            <div>
+                                One paper accepted by TMM. Congrats to Yu-Kun, Fa-Ting, and Wei-Shi!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">August 2022:</span>
-                            I am excited to start my postdoc at the University of Edinburgh, working with Hakan Bilen!
+                            <div>
+                                I am excited to start my postdoc at the University of Edinburgh, working with Hakan Bilen!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">August 2022:</span>
-                            I have passed my PhD viva with my thesis "Learning Universal Representations Across Tasks and Domains". Great thanks to examiners Amir Zamir and Laura Sevilla and my supervisor Hakan Bilen!
+                            <div>
+                                I have passed my PhD viva with my thesis "Learning Universal Representations Across Tasks and Domains". Great thanks to examiners Amir Zamir and Laura Sevilla and my supervisor Hakan Bilen!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">July 2022:</span>
-                            We've released the code of our Universal Representation Learning paper.
+                            <div>
+                                We've released the code of our Universal Representation Learning paper.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">June 2022:</span>
-                            We've released the code of our "Learning Multiple Dense Prediction Tasks from Partially Annotated Data" paper (CVPR 2022).
+                            <div>
+                                We've released the code of our "Learning Multiple Dense Prediction Tasks from Partially Annotated Data" paper (CVPR 2022).
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">June 2022:</span>
-                            Our "Learning Multiple Dense Prediction Tasks from Partially Annotated Data" paper is listed in the CVPR 2022 Best Paper Finalists.
+                            <div>
+                                Our "Learning Multiple Dense Prediction Tasks from Partially Annotated Data" paper is listed in the CVPR 2022 Best Paper Finalists.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">April 2022:</span>
-                            We've released a preprint of our work 'Universal Representations: A Unified Look at Multiple Task and Domain Learning'.
+                            <div>
+                                We've released a preprint of our work 'Universal Representations: A Unified Look at Multiple Task and Domain Learning'.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">March 2022:</span>
-                            We've released the code of our TSA paper (CVPR 2022).
+                            <div>
+                                We've released the code of our TSA paper (CVPR 2022).
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">March 2022:</span>
-                            Two papers accepted to CVPR 2022. Congrats to Xialei and Hakan!
+                            <div>
+                                Two papers accepted to CVPR 2022. Congrats to Xialei and Hakan!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">February 2022:</span>
-                            Giving an invited presentation (Universal Representation Learning and Task-specific Adaptation for Few-shot Learning) in VGG, University of Oxford.
+                            <div>
+                                Giving an invited presentation (Universal Representation Learning and Task-specific Adaptation for Few-shot Learning) in VGG, University of Oxford.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">February 2022:</span>
-                            I maintain an up-to-date list of works on Multi-task Learning here.
+                            <div>
+                                I maintain an up-to-date list of works on Multi-task Learning here.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">December 2021:</span>
-                            We've released a preprint of our work on Multi-task Partially Supervised Learning.
+                            <div>
+                                We've released a preprint of our work on Multi-task Partially Supervised Learning.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">October 2021:</span>
-                            We've released the code of our URL paper (ICCV 2021).
+                            <div>
+                                We've released the code of our URL paper (ICCV 2021).
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">July 2021:</span>
-                            One paper to appear at ICCV 2021. Congrats to Xialei and Hakan!
+                            <div>
+                                One paper to appear at ICCV 2021. Congrats to Xialei and Hakan!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">July 2021:</span>
-                            We've released a preprint of our recent work on 'Cross-domain Few-shot Learning with Task-specific Adapters'.
+                            <div>
+                                We've released a preprint of our recent work on 'Cross-domain Few-shot Learning with Task-specific Adapters'.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">April 2021:</span>
-                            We've released the code of semi-supervised important people detection (CVPR 2020).
+                            <div>
+                                We've released the code of semi-supervised important people detection (CVPR 2020).
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">March 2021:</span>
-                            We've released a preprint of our recent work on 'Universal Representation Learning from Multiple Domains for Few-shot Classification'.
+                            <div>
+                                We've released a preprint of our recent work on 'Universal Representation Learning from Multiple Domains for Few-shot Classification'.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">December 2020:</span>
-                            Code for our "MINI-Net: Multiple Instance Ranking Network for Video Highlight Detection" paper is available.
+                            <div>
+                                Code for our "MINI-Net: Multiple Instance Ranking Network for Video Highlight Detection" paper is available.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">September 2020:</span>
-                            Code for our "Knowledge Distillation for Multi-task Learning" paper is now available.
+                            <div>
+                                Code for our "Knowledge Distillation for Multi-task Learning" paper is now available.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">August 2020:</span>
-                            Attending and presenting our work at ECCV 2020.
+                            <div>
+                                Attending and presenting our work at ECCV 2020.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">July 2020:</span>
-                            One paper to appear at ECCV 2020 and one at the IPCV Workshop.
+                            <div>
+                                One paper to appear at ECCV 2020 and one at the IPCV Workshop.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">June 2020:</span>
-                            We've released the EMS and ENCAA datasets.
+                            <div>
+                                We've released the EMS and ENCAA datasets.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">February 2020:</span>
-                            One paper to appear at CVPR 2020. The paper and poster are now online.
+                            <div>
+                                One paper to appear at CVPR 2020. The paper and poster are now online.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">January 2020:</span>
-                            Attending the Informatics Workshop (Meta-learning) at University of Edinburgh.
+                            <div>
+                                Attending the Informatics Workshop (Meta-learning) at University of Edinburgh.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">December 2019:</span>
-                            The paper and code of our recent work on semi-supervised learning are now available at our project page.
+                            <div>
+                                The paper and code of our recent work on semi-supervised learning are now available at our project page.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">December 2019:</span>
-                            Attending the Huawei Research Workshop in Shanghai.
+                            <div>
+                                Attending the Huawei Research Workshop in Shanghai.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">November 2019:</span>
-                            Attending the Amazon Research Day and presenting my recent work on semi-supervised learning.
+                            <div>
+                                Attending the Amazon Research Day and presenting my recent work on semi-supervised learning.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">September 2019:</span>
-                            Pass my first annual review.
+                            <div>
+                                Pass my first annual review.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">June 2019:</span>
-                            Attending CVPR 2019 in Long Beach, USA, for presenting my recent paper on important people detection.
+                            <div>
+                                Attending CVPR 2019 in Long Beach, USA, for presenting my recent paper on important people detection.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">April 2019:</span>
-                            The Paper, Code and Supplementary Material of our CVPR 2019 paper are available at our project page.
+                            <div>
+                                The Paper, Code and Supplementary Material of our CVPR 2019 paper are available at our project page.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">March 2019:</span>
-                            The paper One-pass Person Re-identification by Sketched Online Discriminant Analysis is accepted to be published in Pattern Recognition (PR). Congrats to Zhuowei Zhong and Wei-Shi Zheng.
+                            <div>
+                                The paper One-pass Person Re-identification by Sketched Online Discriminant Analysis is accepted to be published in Pattern Recognition (PR). Congrats to Zhuowei Zhong and Wei-Shi Zheng.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">February 2019:</span>
-                            The paper Learning to Learn Relation for Important People Detection in Still Images is accepted by CVPR 2019. Congrats to Fa-Ting Hong and Wei-Shi Zheng.
+                            <div>
+                                The paper Learning to Learn Relation for Important People Detection in Still Images is accepted by CVPR 2019. Congrats to Fa-Ting Hong and Wei-Shi Zheng.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">February 2019:</span>
-                            Our group page is now available.
+                            <div>
+                                Our group page is now available.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">October 2018:</span>
-                            Two important people image datasets are available!
+                            <div>
+                                Two important people image datasets are available!
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">September 2018:</span>
-                            I am excited to start my PhD study with Prof. Hakan Bilen.
+                            <div>
+                                I am excited to start my PhD study with Prof. Hakan Bilen.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">January 2018:</span>
-                            The paper PersonRank: Detecting Important People in Images is accepted by the FG 2018 as an oral paper.
+                            <div>
+                                The paper PersonRank: Detecting Important People in Images is accepted by the FG 2018 as an oral paper.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">December 2017:</span>
-                            The paper One-pass Person Re-identification by Sketched Online Discriminant Analysis is available on arXiv and the project page can be found here.
+                            <div>
+                                The paper One-pass Person Re-identification by Sketched Online Discriminant Analysis is available on arXiv and the project page can be found here.
+                            </div>
                         </div>
                         <div class="news-item">
                             <span class="news-date">September 2017:</span>
-                            The paper Correlation based Identity Filter: An Efficient Framework For Person Search is accepted by ICIG 2017 and is awarded The Best Paper Award.
+                            <div>
+                                The paper Correlation based Identity Filter: An Efficient Framework For Person Search is accepted by ICIG 2017 and is awarded The Best Paper Award.
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Contact Section -->
-            <section id="contact" class="contact fade-in">
+            <section id="contact" class="contact">
                 <div class="contact-content">
                     <div class="contact-info">
                         <h3>Get in Touch</h3>
@@ -1283,11 +1250,6 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1302,39 +1264,6 @@
             });
         });
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all elements with fade-in class
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(4, 30, 66, 0.95)';
-                navbar.style.backdropFilter = 'blur(25px)';
-                navbar.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
-                navbar.style.backdropFilter = 'blur(20px)';
-                navbar.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
-            }
-        });
-        
         // Back to top functionality
         function scrollToTop() {
             window.scrollTo({
@@ -1357,13 +1286,6 @@
             }
         });
         
-        // Logo click to go home
-        document.querySelector('.logo').addEventListener('click', function(e) {
-            if (this.getAttribute('href') === 'index.html' && window.location.pathname.includes('index.html')) {
-                e.preventDefault();
-                scrollToTop();
-            }
-        });
     </script>
 
     <!-- Google Analytics -->

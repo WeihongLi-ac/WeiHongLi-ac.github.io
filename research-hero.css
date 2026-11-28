@@ -1,0 +1,73 @@
+.research-hero {
+    padding-block: var(--site-nav-height, 4.5rem) 0;
+    background: linear-gradient(105deg, #071832, #0a192b 50%, #080f19);
+}
+
+.research-hero__layout {
+    --research-hero-inset: max(var(--site-gutter), calc((100% - var(--site-header-width)) / 2));
+    display: grid;
+    grid-template-columns: var(--research-hero-inset) minmax(0, 1fr) var(--research-hero-inset);
+}
+
+.research-hero__copy {
+    grid-column: 2;
+    padding-block: var(--site-header-space);
+}
+
+.research-hero__description {
+    max-width: 44ch;
+}
+
+.research-hero__art {
+    grid-column: 1 / -1;
+    margin: 0;
+    overflow: hidden;
+}
+
+.research-hero__art img {
+    display: block;
+    width: 128%;
+    max-width: none;
+    height: auto;
+    margin-inline-start: -28%;
+    /* Keep the foreground participant framed below the face. */
+    transform: translateX(5%);
+}
+
+@media (min-width: 64rem) {
+    .research-hero__layout {
+        min-height: var(--site-header-band);
+    }
+
+    .research-hero__copy,
+    .research-hero__art {
+        grid-row: 1;
+    }
+
+    .research-hero__copy {
+        z-index: 1;
+        align-self: center;
+        max-width: min(48vw, 36rem);
+        padding-block: var(--site-header-band-padding);
+    }
+
+    .research-hero__art {
+        position: relative;
+    }
+
+    .research-hero__art img {
+        position: absolute;
+        inset-block: 0;
+        inset-inline-end: 0;
+        width: auto;
+        height: 100%;
+        margin-inline-start: 0;
+        mask-image: linear-gradient(to right, transparent, #000 9rem);
+    }
+}
+
+@media (64rem <= width < 74rem) {
+    .research-hero__art img {
+        mask-image: linear-gradient(to right, transparent 17%, #000 42%);
+    }
+}

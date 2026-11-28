@@ -1,0 +1,105 @@
+:root {
+    --site-max-width: 96rem;
+    --site-gutter: clamp(1.25rem, 3vw, 2.75rem);
+    --site-header-width: 70rem;
+    --site-header-space: clamp(1.75rem, 3.4vw, 3rem);
+    --site-header-band: 18rem;
+    --site-header-band-padding: 1rem;
+    --site-section-space: clamp(2.5rem, 5vw, 4.5rem);
+    --site-surface: #f8fafc;
+    --site-rule: #dbe3ed;
+}
+
+.container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--site-max-width);
+    margin-inline: auto;
+    padding-inline: var(--site-gutter);
+}
+
+.page-header,
+.research-hero {
+    padding-block: calc(var(--site-nav-height, 4.5rem) + var(--site-header-space)) var(--site-header-space);
+    color: #f6f9ff;
+    background: linear-gradient(110deg, #071832, #0f2644);
+}
+
+.page-header > .container {
+    max-width: calc(var(--site-header-width) + var(--site-gutter) + var(--site-gutter));
+}
+
+@media (min-width: 64rem) {
+    .page-header {
+        padding-block: var(--site-nav-height, 4.5rem) 0;
+    }
+
+    .page-header > .container {
+        display: grid;
+        align-content: center;
+        min-height: var(--site-header-band);
+        padding-block: var(--site-header-band-padding);
+    }
+}
+
+.page-header h1,
+.research-hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+}
+
+.page-header p,
+.research-hero__description {
+    max-width: 62ch;
+    margin: 0;
+    color: #d6e0ed;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    text-wrap: balance;
+}
+
+.keep-together {
+    white-space: nowrap;
+}
+
+.page-main {
+    padding-block: clamp(1.75rem, 3.75vw, 3rem) var(--site-section-space);
+}
+
+.page-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin-bottom: clamp(1.5rem, 3.4vw, 2.75rem);
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.625rem 0.95rem;
+    border: 1px solid #cbd7e5;
+    border-radius: 8px;
+    color: #153452;
+    background: #fff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    border-color: #8ca4bf;
+    background: #f0f5fb;
+}
+
+.back-btn:focus-visible {
+    outline: 2px solid #276891;
+    outline-offset: 3px;
+}
